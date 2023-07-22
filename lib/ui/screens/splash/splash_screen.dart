@@ -1,7 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bikes_ui/ui/screens/intro/intro_screen.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    Future.delayed(
+      const Duration(seconds: 3),
+      () => Navigator.of(context).pushReplacement(PageRouteBuilder(
+        transitionDuration: const Duration(milliseconds: 650),
+        pageBuilder: (context, animation, _) {
+          return FadeTransition(opacity: animation, child: IntroScreen());
+        },
+      )),
+    );
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +48,11 @@ class SplashScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: const Image(
-                    image: AssetImage('assets/logo.png'),
+                  child: const Hero(
+                    tag: 'logo',
+                    child: Image(
+                      image: AssetImage('assets/logo.png'),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 20),
