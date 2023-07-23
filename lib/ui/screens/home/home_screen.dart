@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bikes_ui/ui/screens/details/details_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -11,6 +12,18 @@ class HomeScreen extends StatelessWidget {
       'assets/icons/2.png',
       'assets/icons/3.png',
       'assets/icons/4.png',
+    ];
+    final List<dynamic> bikes = [
+      ['assets/bikes/1.png', Colors.blueAccent.shade700],
+      ['assets/bikes/2.png', Colors.yellow.shade700],
+      ['assets/bikes/3.png', Colors.purple.shade700],
+      ['assets/bikes/4.png', Colors.orange.shade700],
+      ['assets/bikes/5.png', Colors.cyanAccent],
+      ['assets/bikes/6.png', Colors.red.shade700],
+      ['assets/bikes/7.png', Colors.black],
+      ['assets/bikes/8.png', Colors.indigo.shade900],
+      ['assets/bikes/9.png', Colors.greenAccent.shade700],
+      ['assets/bikes/10.png', Colors.grey.shade800],
     ];
     return Scaffold(
       backgroundColor: Colors.white,
@@ -163,7 +176,7 @@ class HomeScreen extends StatelessWidget {
           ),
           Expanded(
               child: ListView.builder(
-            itemCount: 10,
+            itemCount: bikes.length,
             scrollDirection: Axis.horizontal,
             physics: const BouncingScrollPhysics(),
             itemBuilder: (context, index) {
@@ -226,12 +239,15 @@ class HomeScreen extends StatelessWidget {
                           style: TextStyle(fontSize: 18),
                         ),
                       ),
-                      const Positioned(
+                      Positioned(
                         top: 80,
                         right: -40,
-                        child: Image(
-                          width: 220,
-                          image: AssetImage('assets/bikes/1.png'),
+                        child: Hero(
+                          tag: index,
+                          child: Image(
+                            width: 220,
+                            image: AssetImage(bikes[index][0]),
+                          ),
                         ),
                       ),
                       Positioned(
@@ -250,42 +266,64 @@ class HomeScreen extends StatelessWidget {
                             ),
                             CircleAvatar(
                               radius: 8,
-                              backgroundColor: Colors.blue.shade700,
+                              backgroundColor: bikes[index][1],
                             )
                           ],
                         ),
                       ),
                       Positioned(
                         bottom: -15,
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 30),
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomRight,
-                                colors: [
-                                  Colors.amber.shade700,
-                                  const Color.fromARGB(255, 161, 62, 8),
-                                ]),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(30),
-                              bottomLeft: Radius.circular(10),
-                              topRight: Radius.circular(30),
-                              bottomRight: Radius.circular(10),
-                            ),
-                          ),
-                          child: const Row(
-                            children: [
-                              Text(
-                                'Explore',
-                                style: TextStyle(color: Colors.white),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              PageRouteBuilder(
+                                transitionDuration:
+                                    const Duration(milliseconds: 650),
+                                reverseTransitionDuration:
+                                    const Duration(milliseconds: 650),
+                                pageBuilder: (context, animation, _) {
+                                  return FadeTransition(
+                                    opacity: animation,
+                                    child: DetailsScreen(
+                                      bike: bikes[index][0],
+                                      color: bikes[index][1],
+                                      index: index,
+                                    ),
+                                  );
+                                },
                               ),
-                              Icon(
-                                Icons.arrow_forward,
-                                color: Colors.white,
-                              )
-                            ],
+                            );
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 30),
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomRight,
+                                  colors: [
+                                    Colors.amber.shade700,
+                                    const Color.fromARGB(255, 161, 62, 8),
+                                  ]),
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(30),
+                                bottomLeft: Radius.circular(10),
+                                topRight: Radius.circular(30),
+                                bottomRight: Radius.circular(10),
+                              ),
+                            ),
+                            child: const Row(
+                              children: [
+                                Text(
+                                  'Explore',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                Icon(
+                                  Icons.arrow_forward,
+                                  color: Colors.white,
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       )
