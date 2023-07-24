@@ -18,12 +18,12 @@ class HomeScreen extends StatelessWidget {
       ['assets/bikes/2.png', Colors.yellow.shade700],
       ['assets/bikes/3.png', Colors.purple.shade700],
       ['assets/bikes/4.png', Colors.orange.shade700],
-      ['assets/bikes/5.png', Colors.cyanAccent],
+      ['assets/bikes/5.png', Colors.cyanAccent.shade700],
       ['assets/bikes/6.png', Colors.red.shade700],
-      ['assets/bikes/7.png', Colors.black],
+      ['assets/bikes/7.png', const Color.fromARGB(255, 42, 40, 40)],
       ['assets/bikes/8.png', Colors.indigo.shade900],
-      ['assets/bikes/9.png', Colors.greenAccent.shade700],
-      ['assets/bikes/10.png', Colors.grey.shade800],
+      ['assets/bikes/9.png', Colors.green.shade900],
+      ['assets/bikes/10.png', const Color.fromARGB(255, 160, 95, 16)],
     ];
     return Scaffold(
       backgroundColor: Colors.white,
