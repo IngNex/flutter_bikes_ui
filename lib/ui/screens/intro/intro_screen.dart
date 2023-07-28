@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bikes_ui/ui/screens/home/home_screen.dart';
+import 'package:flutter_bikes_ui/ui/widgets/animation_scale_elastic.dart';
 
 class IntroScreen extends StatelessWidget {
   const IntroScreen({super.key});
@@ -48,44 +49,50 @@ class IntroScreen extends StatelessWidget {
             ),
             Positioned(
               bottom: size.height * 0.16,
-              child: const Text(
-                'BIKES',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 60,
-                    letterSpacing: -5,
-                    fontWeight: FontWeight.bold),
+              child: const AnimationScaleElastic(
+                child: Text(
+                  'BIKES',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 60,
+                      letterSpacing: -5,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
             ),
             Positioned(
               bottom: size.height * 0.05,
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
-                    PageRouteBuilder(
-                      transitionDuration: const Duration(milliseconds: 650),
-                      reverseTransitionDuration:
-                          const Duration(milliseconds: 650),
-                      pageBuilder: (context, animation, _) {
-                        return FadeTransition(
-                            opacity: animation, child: const HomeScreen());
-                      },
+              child: AnimationScaleElastic(
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      PageRouteBuilder(
+                        transitionDuration: const Duration(milliseconds: 650),
+                        reverseTransitionDuration:
+                            const Duration(milliseconds: 650),
+                        pageBuilder: (context, animation, _) {
+                          return FadeTransition(
+                              opacity: animation, child: const HomeScreen());
+                        },
+                      ),
+                    );
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 80, vertical: 10),
+                    decoration: BoxDecoration(
+                        color: Colors.orange.shade700,
+                        boxShadow: const [
+                          BoxShadow(
+                              blurRadius: 8,
+                              spreadRadius: 1,
+                              color: Colors.black)
+                        ],
+                        borderRadius: BorderRadius.circular(30)),
+                    child: const Text(
+                      '> > >',
+                      style: TextStyle(fontSize: 25, color: Colors.white),
                     ),
-                  );
-                },
-                child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 80, vertical: 10),
-                  decoration: BoxDecoration(
-                      color: Colors.orange.shade700,
-                      boxShadow: const [
-                        BoxShadow(
-                            blurRadius: 8, spreadRadius: 1, color: Colors.black)
-                      ],
-                      borderRadius: BorderRadius.circular(30)),
-                  child: const Text(
-                    '> > >',
-                    style: TextStyle(fontSize: 25, color: Colors.white),
                   ),
                 ),
               ),

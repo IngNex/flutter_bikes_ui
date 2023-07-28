@@ -32,37 +32,57 @@ class _SplashScreenState extends State<SplashScreen> {
         alignment: Alignment.center,
         children: [
           Positioned(
-            top: size.height * 0.35,
+            top: size.height * 0.38,
             child: Column(
               children: [
-                Container(
-                  height: 200,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        blurRadius: 5,
-                        spreadRadius: 0.25,
-                        color: Colors.grey,
-                      ),
-                    ],
-                  ),
-                  child: const Hero(
-                    tag: 'logo',
-                    child: Image(
-                      image: AssetImage('assets/logo.png'),
-                    ),
-                  ),
-                ),
+                TweenAnimationBuilder(
+                    duration: const Duration(seconds: 1),
+                    tween: Tween(begin: 0.0, end: 1.0),
+                    curve: Curves.elasticOut,
+                    builder: (context, value, child) {
+                      return Transform.scale(
+                        scale: value,
+                        origin: Offset(0, 200 * value),
+                        child: Container(
+                          height: 180,
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 5,
+                                spreadRadius: 0.25,
+                                color: Colors.grey,
+                              ),
+                            ],
+                          ),
+                          child: const Hero(
+                            tag: 'logo',
+                            child: Image(
+                              image: AssetImage('assets/logo.png'),
+                            ),
+                          ),
+                        ),
+                      );
+                    }),
                 const SizedBox(height: 20),
-                const Text(
-                  'BIKES',
-                  style: TextStyle(
-                      fontSize: 45,
-                      letterSpacing: 10,
-                      fontWeight: FontWeight.bold),
-                )
+                TweenAnimationBuilder(
+                    duration: const Duration(seconds: 1),
+                    tween: Tween(begin: 0.0, end: 1.0),
+                    curve: Curves.elasticOut,
+                    builder: (context, value, child) {
+                      return Transform.scale(
+                        scale: value,
+                        origin: Offset(0, 200 * value),
+                        child: const Text(
+                          'BIKES',
+                          style: TextStyle(
+                              fontSize: 45,
+                              letterSpacing: 10,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      );
+                    })
               ],
             ),
           ),
